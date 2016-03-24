@@ -6,9 +6,11 @@
 #
 
 ### Decompress income data
-#data/income/us/household_incomes.csv:
-	#gzip -d $@
-
+data/income/us/ACS_14_5YR_B19001.csv:
+	mkdir $(dir $@)
+	gzip -d data/gz/$(notdir @)
+	mv data/gz/$(notdir @) $@
+	
 ### Reconstitute 2000 census MSA
 #data/crosswalks/msa_county.csv data/names/msa.csv: data/gz/99mfips.txt
 	#mkdir -p data/crosswalks
