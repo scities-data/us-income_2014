@@ -17,10 +17,10 @@ data/income/us/ACS_14_5YR_B19001.csv:
 	#mkdir -p data/names	
 	#python bin/data_prep/crosswalk_msa_county.py
 
-#data/gz/99mfips.txt:
-	#mkdir -p $(dir $@)
-	#curl "http://www.census.gov/population/metro/files/lists/historical/$(notdir $@)" -o $@.download
-	#mv $@.download $@
+data/gz/List1.xls:
+	mkdir -p $(dir $@)
+	curl "http://www.census.gov/population/metro/files/lists/2013/$(notdir $@)" -o $@.download
+	mv $@.download $@
 
 
 ## Download census block-groups
