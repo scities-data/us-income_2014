@@ -73,3 +73,12 @@ data/shp/us/counties.shp: data/gz/tl_2014_us_county.zip
 	touch $@
 
 download_counties: data/shp/us/counties.shp
+
+
+## Prepare data
+
+# Crosswalk CBSA counties and CBSA names
+data/names/cbsa_names.txt data/crosswalks/cbsa_county.txt:
+	mkdir -p data/names
+	mkdir -p data/crosswalks
+	python2 bin/crosswalks/cbsa_county.py
