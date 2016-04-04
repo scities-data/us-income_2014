@@ -7,16 +7,11 @@
 
 ### Decompress income data
 data/income/us/ACS_14_5YR_B19001.csv:
-	mkdir $(dir $@)
-	gzip -d data/gz/$(notdir @)
-	mv data/gz/$(notdir @) $@
+	mkdir -p $(dir $@)
+	gzip -d data/gz/$(notdir $@)
+	mv data/gz/$(notdir $@) $@
 	
 ### Reconstitute 2000 census MSA
-#data/crosswalks/msa_county.csv data/names/msa.csv: data/gz/99mfips.txt
-	#mkdir -p data/crosswalks
-	#mkdir -p data/names	
-	#python bin/data_prep/crosswalk_msa_county.py
-
 data/gz/List1.xls:
 	mkdir -p $(dir $@)
 	curl "http://www.census.gov/population/metro/files/lists/2013/$(notdir $@)" -o $@.download
