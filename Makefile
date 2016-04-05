@@ -125,3 +125,20 @@ shapefile_tract:
 shapefile_county:
 	mkdir -p data/shp/cbsa
 	python2 bin/shp/cbsa_county.py
+
+
+# Adjacency between areal units
+## Blockgroups
+adjacency_blockgroup:
+	mkdir -p  data/adjacency/cbsa
+	python2 bin/adjacency/blockgroups.py
+
+## Tracts
+adjacency_tract:
+	mkdir -p  data/adjacency/cbsa
+	python2 bin/adjacency/tracts.py
+
+## Counties
+adjacency_county:
+	mkdir -p  data/adjacency/cbsa
+	python2 bin/adjacency/counties.py
