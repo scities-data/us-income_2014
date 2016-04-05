@@ -89,7 +89,7 @@ data/crosswalks/cbsa_tract:
 ## Crosswalk Blockgroups and CBSA
 data/crosswalks/cbsa_blockgroup:
 	mkdir -p $(dir $@)
-	python2 bin/crosswalks/cbsa_blockgroups.py
+	python2 bin/crosswalks/cbsa_blockgroup.py
 
 
 # Income per CBSA
