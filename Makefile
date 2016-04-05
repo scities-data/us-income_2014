@@ -107,3 +107,16 @@ income_tract:
 income_county:
 	mkdir -p data/income/cbsa
 	python2 bin/income/income_county.py
+
+
+
+# Shapefiles for MSAs
+## Blockgroups
+shapefile_blockgroup:
+	mkdir -p data/shp/cbsa
+	python2 bin/shp/cbsa_blockgroup.py
+
+## Tracts
+shapefile_tract:
+	mkdir -p data/shp/cbsa
+	python2 bin/shp/cbsa_tract.py
