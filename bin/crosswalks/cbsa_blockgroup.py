@@ -30,7 +30,6 @@ with open('data/income/us/ACS_14_5YR_B19001.csv', 'r') as source:
     reader.next()
     reader.next()
     for rows in reader:
-        print rows
         incomes[rows[1]] = [int(i) for i in rows[7:]]
 
 
