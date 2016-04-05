@@ -104,3 +104,6 @@ income_tract:
 	python2 bin/income/income_tract.py
 
 ## County level
+income_county:
+	mkdir -p data/income/cbsa
+	python2 bin/income/income_county.py
