@@ -97,6 +97,10 @@ data/crosswalks/cbsa_blockgroup:
 income_blockgroup:
 	mkdir -p data/income/cbsa
 	python2 bin/income/income_blockgroup.py
+
 ## Tract level
+income_tract:
+	mkdir -p data/income/cbsa
+	python2 bin/income/income_tract.py
 
 ## County level
