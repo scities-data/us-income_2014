@@ -70,10 +70,31 @@ data/shp/us/counties.shp: data/gz/tl_2014_us_county.zip
 download_counties: data/shp/us/counties.shp
 
 
-## Prepare data
+##################
+## Prepare data ##
+##################
 
-# Crosswalk CBSA counties and CBSA names
+# Crosswalks
+## Crosswalk Counties and CBSA | CBSA names
 data/names/cbsa_names.txt data/crosswalks/cbsa_county.txt:
 	mkdir -p data/names
 	mkdir -p data/crosswalks
 	python2 bin/crosswalks/cbsa_county.py
+
+## Crosswalk Tracts and CBSA
+data/crosswalks/cbsa_tract:
+	mkdir -p $(dir $@)
+	python2 bin/crosswalks/cbsa_tract.py
+
+## Crosswalk Blockgroups and CBSA
+data/crosswalks/cbsa_blockgroup:
+	mkdir -p $(dir $@)
+	python2 bin/crosswalks/cbsa_blockgroups.py
+
+
+# Income per CBSA
+## Blockgroup level 
+
+## Tract level
+
+## County level
