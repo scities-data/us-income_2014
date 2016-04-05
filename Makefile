@@ -54,12 +54,12 @@ download_tracts: data/shp/state/01/tracts.shp data/shp/state/02/tracts.shp data/
 
 
 ## Download census counties
-data/gz/tl_2014_us_county.zip:
+data/gz/tl_2012_us_countyec.zip:
 	mkdir -p $(dir $@)
-	curl 'http://www2.census.gov/geo/tiger/TIGER2014/COUNTY/$(notdir $@)' -o $@.download
+	curl 'http://www2.census.gov/geo/tiger/TIGER2014/COUNTYEC/$(notdir $@)' -o $@.download
 	mv $@.download $@
 
-data/shp/us/counties.shp: data/gz/tl_2014_us_county.zip
+data/shp/us/counties.shp: data/gz/tl_2012_us_countyec.zip
 	rm -rf $(basename $@)
 	mkdir -p $(basename $@)
 	unzip -d $(basename $@) $<
@@ -120,3 +120,8 @@ shapefile_blockgroup:
 shapefile_tract:
 	mkdir -p data/shp/cbsa
 	python2 bin/shp/cbsa_tract.py
+
+## Counties
+shapefile_county:
+	mkdir -p data/shp/cbsa
+	python2 bin/shp/cbsa_county.py
