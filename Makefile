@@ -70,6 +70,10 @@ data/shp/us/counties.shp: data/gz/tl_2012_us_countyec.zip
 download_counties: data/shp/us/counties.shp
 
 
+
+
+
+
 ##################
 ## Prepare data ##
 ##################
@@ -90,6 +94,7 @@ data/crosswalks/cbsa_tract:
 data/crosswalks/cbsa_blockgroup:
 	mkdir -p $(dir $@)
 	python2 bin/crosswalks/cbsa_blockgroup.py
+
 
 
 # Income per CBSA
@@ -127,6 +132,7 @@ shapefile_county:
 	python2 bin/shp/cbsa_county.py
 
 
+
 # Adjacency between areal units
 ## Blockgroups
 adjacency_blockgroup:
@@ -142,3 +148,26 @@ adjacency_tract:
 adjacency_county:
 	mkdir -p  data/adjacency/cbsa
 	python2 bin/adjacency/counties.py
+
+
+
+# Compute the surface area of areal units
+## Blockgroups
+
+## Tracts
+
+## Counties
+
+
+
+# Compute the total population
+## Per CBSA
+data/counts/cbsa_households.txt:
+	mkdir -p $(dir $@)
+	python2 bin/counts/cbsa_population.py
+
+## In the entire US
+data/counts/us_households.txt:
+	mkdir -p $(dir $@)
+	python2 bin/counts/us_population.py
+
