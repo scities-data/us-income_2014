@@ -153,10 +153,19 @@ adjacency_county:
 
 # Compute the surface area of areal units
 ## Blockgroups
+surface_blockgroup:
+	mkdir -p data/surface_area/cbsa
+	python2 bin/surface/blockgroup.py
 
 ## Tracts
+surface_tract:
+	mkdir -p data/surface_area/cbsa
+	python2 bin/surface/tract.py
 
 ## Counties
+surface_county:
+	mkdir -p data/surface_area/cbsa
+	python2 bin/surface/county.py
 
 
 
