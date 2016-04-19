@@ -54,7 +54,7 @@ for sheet_name in book.sheet_names():
 
 # Names
 with open('data/names/cbsa_names.txt', 'w') as output:
-    output.write('CBSA FIPS CODE\tCBSA NAME\t')
+    output.write('CBSA FIPS CODE\tCBSA NAME\n')
     for c in name_list:
         output.write('%s\t%s\n'%(c, name_list[c]))
 
