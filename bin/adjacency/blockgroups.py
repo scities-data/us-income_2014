@@ -44,7 +44,7 @@ for i,city in enumerate(cbsa):
             adjacency[b0].append(b1)
 
     ## Save data
-    with open('data/adjacency/cbsa/%s_blockgroups.txt'%city, 'w') as output:
+    with open('data/adjacency/cbsa/%s/%s_adjacency_blockgroups.txt'%(city,city), 'w') as output:
        output.write("BLOCKGROUP FIPS\tNEIGHBOURS FIPS\n")
        for b0 in adjacency:
            output.write("%s"%b0)
