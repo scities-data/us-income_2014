@@ -74,7 +74,7 @@ for cbsa in incomes_cbsa:
         os.mkdir('data/income/cbsa/%s'%cbsa)
     
     ## Save
-    with open('data/income/cbsa/%s/%s_income_county.txt'%(cbsa, cbsa), 'w') as output:
+    with open('data/income/cbsa/%s/counties.txt'%cbsa, 'w') as output:
         output.write("COUNTY FIP\tLess than $10000\t$10000-$14999\t$15000-$19999\t$20000-$24999\t$25000-$29999\t$30000-$34999\t$35000-$39999\t$40000-$44999\t$45000-$49999\t$50000-$59999\t$60000-$74999\t$75000-$99999\t$100000-$124999\t$125000-$149999\t$150000-$199999\t$200000 or more\n")
         for ct in incomes_cbsa[cbsa]:
             output.write(str(ct)+'\t')
