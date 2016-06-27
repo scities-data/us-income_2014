@@ -18,7 +18,7 @@ with open('data/names/cbsa_names.txt', 'r') as source:
 households = {}
 for city in msa:
     households[city]=0
-    with open('data/income/cbsa/%s/%s_income_bg.txt'%(city,city), 'r') as source:
+    with open('data/income/cbsa/%s/blockgroups.txt'%city, 'r') as source:
         reader = csv.reader(source, delimiter='\t')
         reader.next()
         for rows in reader:

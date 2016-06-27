@@ -1,9 +1,9 @@
-#Author: Remi Louf <remilouf@sciti.es>
+# Author: Remi Louf <remi@sciti.es>
 # Date:   24/03/2016
 #
 # Download all the data necessary to analyse the income of households
 # Using the ACS 2014 data
-#
+
 
 all: 
 
