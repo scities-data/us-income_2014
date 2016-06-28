@@ -22,6 +22,13 @@ counties:
 # Crosswalk tracts
 # Crosswalk counties
 
+data/gz/master.zip:
+	curl -sL https://github.com/scities-data/metro-atlas_2014/archive/$(notdir $@).zip -o  $@.download
+	mv $@.download $@
+
+#data/crosswalks/cbsa_blockgroups.txt:
+
+
 
 ###############
 # INCOME DATA #
