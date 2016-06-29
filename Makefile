@@ -5,28 +5,60 @@
 # Using the ACS 2014 data
 
 
-all: 
+all: blockgroups tracts counties
 
-blockgroups:
-tracts:
-counties:
+blockgroups: income_blockgroup
+tracts: income_tract
+counties: income_county
 
 
 ###########################
 # METROPOLITAN AREAS DATA #
 ###########################
 
-# Download shapefile and crosswalks from MSA
 
-# Crosswalk blockgroups
-# Crosswalk tracts
-# Crosswalk counties
-
+# Download 2014 US metro atlas from repo and unzip
 data/gz/master.zip:
-	curl -sL https://github.com/scities-data/metro-atlas_2014/archive/$(notdir $@).zip -o  $@.download
+	curl -sL https://github.com/scities-data/metro-atlas_2014/archive/$(notdir $@) -o  $@.download
 	mv $@.download $@
 
-#data/crosswalks/cbsa_blockgroups.txt:
+metro-atlas_2014/Makefile: data/gz/master.zip
+	unzip -d ./ $<
+	mv metro-atlas_2014-master $(dir $@)
+
+
+	
+# Crosswalk blockgroups
+metro-atlas_2014/data/crosswalks/cbsa_blockgroup.txt: metro-atlas_2014/Makefile
+	cd $(dir $<) && $(MAKE) $(subst metro-atlas_2014/, ,$@)
+
+data/crosswalks/cbsa_blockgroup.txt: metro-atlas_2014/data/crosswalks/cbsa_blockgroup.txt
+	mkdir -p $(dir $@)
+	cp $< $@
+
+
+
+# Crosswalk tracts
+metro-atlas_2014/data/crosswalks/cbsa_tract.txt: metro-atlas_2014/Makefile
+	cd $(dir $<) && $(MAKE) $(subst metro-atlas_2014/, ,$@)
+
+
+data/crosswalks/cbsa_tract.txt: metro-atlas_2014/data/crosswalks/cbsa_tract.txt
+	mkdir -p $(dir $@)
+	cp $< $@
+
+
+
+# Crosswalk counties
+metro-atlas_2014/data/crosswalks/cbsa_county.txt: metro-atlas_2014/Makefile
+	cd $(dir $<) && $(MAKE) $(subst metro-atlas_2014/, ,$@)
+
+data/crosswalks/cbsa_county.txt: metro-atlas_2014/data/crosswalks/cbsa_county.txt
+	mkdir -p $(dir $@)
+	cp $< $@
+
+
+
 
 
 
@@ -48,17 +80,17 @@ data/income/us/ACS_14_5YR_B19001.csv:
 
 # Income per CBSA
 ## Blockgroup level 
-income_blockgroup:
+income_blockgroup: data/income/us/ACS_14_5YR_B19001.csv data/crosswalks/cbsa_blockgroup.txt
 	mkdir -p data/income/cbsa
 	python2 bin/income/blockgroups.py
 
-## Tract level
-income_tract:
+## Tract leve
+income_tract: data/income/us/ACS_14_5YR_B19001.csv data/crosswalks/cbsa_tract.txt
 	mkdir -p data/income/cbsa
 	python2 bin/income/tracts.py
 
 ## County level
-income_county:
+income_county: data/income/us/ACS_14_5YR_B19001.csv data/crosswalks/cbsa_county.txt
 	mkdir -p data/income/cbsa
 	python2 bin/income/counties.py
 
