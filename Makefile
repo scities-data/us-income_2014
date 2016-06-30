@@ -7,9 +7,9 @@
 
 all: blockgroups tracts counties count_cbsa count_us clean
 
-blockgroups: income_blockgroup clean
-tracts: income_tract clean
-counties: income_county clean
+blockgroups: income_blockgroup
+tracts: income_tract
+counties: income_county
 
 counts: count_cbsa count_us
 
@@ -60,6 +60,13 @@ data/crosswalks/cbsa_county.txt: metro-atlas_2014/data/crosswalks/cbsa_county.tx
 	cp $< $@
 
 
+# CBSA names
+metro-atlas_2014/data/misc/cbsa_names.txt: metro-atlas_2014/Makefile
+	cd $(dir $<) && $(MAKE) $(subst metro-atlas_2014/, ,$@)
+
+data/misc/cbsa_names.txt:  metro-atlas_2014/data/misc/cbsa_names.txt
+	mkdir -p $(dir $@)
+	cp $< $@
 
 
 
@@ -101,14 +108,14 @@ income_county: data/income/us/ACS_14_5YR_B19001.csv data/crosswalks/cbsa_county.
 
 # Compute the total population
 ## Per CBSA
-count_cbsa: data/counts/cbsa_households.txt
-data/counts/cbsa_households.txt:
+count_cbsa: data/counts/cbsa.txt
+data/counts/cbsa.txt: data/misc/cbsa_names.txt
 	mkdir -p $(dir $@)
 	python2 bin/counts/cbsa_population.py
 
 ## In the entire US
-count_us: data/counts/us_households.txt
-data/counts/us_households.txt:
+count_us: data/counts/us.txt
+data/counts/us.txt: data/misc/cbsa_names.txt
 	mkdir -p $(dir $@)
 	python2 bin/counts/us_population.py
 
@@ -118,11 +125,12 @@ data/counts/us_households.txt:
 #
 # Clean
 #
-data/gz/ACS_14_5YR_B191001.csv.gz: data/income/us/ACS_14_5YR_B191001.csv
+data/gz/ACS_14_5YR_B19001.csv.gz: data/income/us/ACS_14_5YR_B19001.csv
 	gzip $<
 	mv $<.gz $@
 
     
 
-clean:
-	rm -fr data/income metro-atlas_2014
+clean: data/gz/ACS_14_5YR_B19001.csv.gz
+	rm -fr metro-atlas_2014
+	

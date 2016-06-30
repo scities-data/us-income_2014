@@ -7,7 +7,7 @@ import csv
 
 ## Import the list of MSA
 msa = {}
-with open('data/names/cbsa_names.txt', 'r') as source:
+with open('data/misc/cbsa_names.txt', 'r') as source:
     reader = csv.reader(source, delimiter='\t')
     reader.next()
     for rows in reader:
@@ -26,7 +26,7 @@ for city in msa:
 
 
 ## Save the data
-with open('data/counts/cbsa_households.txt', 'w') as output:
+with open('data/counts/cbsa.txt', 'w') as output:
     output.write('CBSA FIP\tNumber of households\n')
     for city in households:
         output.write('%s\t%s\n'%(city, households[city]))
