@@ -1,15 +1,17 @@
 # Author: Remi Louf <remi@sciti.es>
-# Date:   24/03/2016
+# Date:   30/06/2016
 #
 # Download all the data necessary to analyse the income of households
 # Using the ACS 2014 data
 
 
-all: blockgroups tracts counties
+all: blockgroups tracts counties count_cbsa count_us clean
 
-blockgroups: income_blockgroup
-tracts: income_tract
-counties: income_county
+blockgroups: income_blockgroup clean
+tracts: income_tract clean
+counties: income_county clean
+
+counts: count_cbsa count_us
 
 
 ###########################
@@ -77,7 +79,6 @@ data/income/us/ACS_14_5YR_B19001.csv:
 
 
 
-
 # Income per CBSA
 ## Blockgroup level 
 income_blockgroup: data/income/us/ACS_14_5YR_B19001.csv data/crosswalks/cbsa_blockgroup.txt
@@ -100,11 +101,13 @@ income_county: data/income/us/ACS_14_5YR_B19001.csv data/crosswalks/cbsa_county.
 
 # Compute the total population
 ## Per CBSA
+count_cbsa: data/counts/cbsa_households.txt
 data/counts/cbsa_households.txt:
 	mkdir -p $(dir $@)
 	python2 bin/counts/cbsa_population.py
 
 ## In the entire US
+count_us: data/counts/us_households.txt
 data/counts/us_households.txt:
 	mkdir -p $(dir $@)
 	python2 bin/counts/us_population.py
@@ -115,5 +118,11 @@ data/counts/us_households.txt:
 #
 # Clean
 #
-clean:
+data/gz/ACS_14_5YR_B191001.csv.gz: data/income/us/ACS_14_5YR_B191001.csv
+	gzip $<
+	mv $<.gz $@
 
+    
+
+clean:
+	rm -fr data/income metro-atlas_2014
