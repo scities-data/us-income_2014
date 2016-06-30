@@ -14,6 +14,8 @@ counties: income_county
 counts: count_cbsa count_us
 
 
+
+
 ###########################
 # METROPOLITAN AREAS DATA #
 ###########################
@@ -133,4 +135,5 @@ data/gz/ACS_14_5YR_B19001.csv.gz: data/income/us/ACS_14_5YR_B19001.csv
 
 clean: data/gz/ACS_14_5YR_B19001.csv.gz
 	rm -fr metro-atlas_2014
+	rm -fr data/income/us
 	
