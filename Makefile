@@ -73,6 +73,12 @@ data/misc/cbsa_names.txt:  metro-atlas_2014/data/misc/cbsa_names.txt
 
 
 
+
+
+
+
+
+
 ###############
 # INCOME DATA #
 ###############
@@ -84,6 +90,7 @@ data/income/us/ACS_14_5YR_B19001.csv:
 	mkdir -p $(dir $@)
 	gzip -d data/gz/$(notdir $@)
 	mv data/gz/$(notdir $@) $@
+
 
 
 
@@ -124,9 +131,15 @@ data/counts/us.txt: data/misc/cbsa_names.txt
 
 
 
-#
-# Clean
-#
+
+
+
+
+
+
+#########
+# CLEAN #
+#########
 data/gz/ACS_14_5YR_B19001.csv.gz: data/income/us/ACS_14_5YR_B19001.csv
 	gzip $<
 	mv $<.gz $@
